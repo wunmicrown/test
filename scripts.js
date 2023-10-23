@@ -10,7 +10,7 @@ function add(){
       price: price.value,
     };
     allProducts.push(obj);
-    meter();
+    disp();
   } else {
     Erro.innerHTML = `<p style="color:red; text-align: center; font-size:20px; font-weight: 400;">Input must be filled </p>`;
   }
@@ -19,7 +19,7 @@ function add(){
   price.value = "";
 }
 
-function meter() {
+function disp() {
   display.innerHTML = "";
   display.innerHTML = `
     <table class="table">
@@ -41,7 +41,7 @@ function meter() {
         <th scope="row">${i + 1}</th>
         <td>${allProducts[i].title}</td>
         <td>${allProducts[i].des}</td>
-        <td> ${allProducts[i].price}</td>
+        <td >#${allProducts[i].price}</td>
         <td class='d-flex'>
         <button style="border: none; background-color: red; color:white;  text-align: center; padding: 10px 20px 10px 20px; border-radius: 5px; margin:10px;" onclick="edit(${i})">Edit</button>
         <button style="border: none; background-color: blue; color:white;  text-align: center; padding: 10px 20px 10px 20px; border-radius: 5px; margin:10px;" onclick="del(${i})">Delete</button>
@@ -58,7 +58,7 @@ function del(ind) {
  if (confirmalert) {
     allProducts.splice(ind, 1);
  } 
-  meter();
+  disp();
 }
 
 function edit(ind) {
@@ -67,12 +67,13 @@ function edit(ind) {
 }
 
 function change() {
-  newObj = {
-    title: repTitle.value,
-    detail: repDetails.value,
-  };
+    newObj = {
+        title:repTitle.value,
+        des: repDetails.value,
+        price: priceDetails.value,
+      };
   allProducts.splice(edInd, 1, newObj);
-  meter();
+  disp();
   repDiv.style.display = "none";
   edInd = 0;
 }
